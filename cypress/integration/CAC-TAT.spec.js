@@ -118,5 +118,16 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         .invoke('val', Texto)
         .should('have.value', Texto)
     })
+    
+    it.only('Request', function(){
 
+      cy.request('https://cac-tat.s3.eu-central-1.amazonaws.com/index.html')
+        .should(function(response){
+          console.log(response)
+            const {status, statusText, body} = response
+            expect(status).to.equal(200)
+            expect(statusText).to.equal('OK')
+            expect(body).to.include('CAC TAT')
+        })
+    })
 })
