@@ -72,4 +72,22 @@ describe('Central de Atendimento ao Cliente TAT', function() {
       cy.get('#privacy a').invoke('removeAttr', 'target').click()
       cy.contains('Talking About Testing').should('be.visible')
     })
+
+    it('Clock', function(){
+
+      cy.clock()
+
+      const longtext = 'Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste' 
+      cy.get('#firstName').type('Victor')
+      cy.get('#lastName').type('Ecles')
+      cy.get('#email').type('victorecles98@gmail.com')
+      cy.get('#open-text-area').type(longtext)
+      cy.get('button[type="submit"]').click()
+
+      cy.get('.success').should('be.visible')
+
+      cy.tick(3000)
+      cy.get('.success').should('not.be.visible')
+
+    })
 })
